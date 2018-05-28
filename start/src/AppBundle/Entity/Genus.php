@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\GenusRepository")
@@ -19,17 +20,21 @@ class Genus
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $name;
 
     /**
+     * @\Symfony\Component\Validator\Constraints\NotBlank()
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SubFamily")
      * @ORM\JoinColumn(nullable=false)
      */
     private $subFamily;
 
     /**
+     * @\Symfony\Component\Validator\Constraints\NotBlank()
+     * @\Symfony\Component\Validator\Constraints\Range(min=0, minMessage="Come on !")
      * @ORM\Column(type="integer")
      */
     private $speciesCount;
@@ -45,6 +50,7 @@ class Genus
     private $isPublished = true;
 
     /**
+     * @\Symfony\Component\Validator\Constraints\NotBlank()
      * @ORM\Column(type="date")
      */
     private $firstDiscoveredAt;
